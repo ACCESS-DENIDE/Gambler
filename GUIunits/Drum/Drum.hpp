@@ -1,10 +1,15 @@
-#pragma once
+#ifndef DRUMM_CLASS
+#define DRUMM_CLASS
 
 
 #define IS_USE_BUNDLE_MODE false
 
 #define DRUMS_AMOUNT 5
 #define DRUM_IMAGES_AMOUNT 9
+
+#define MAX_ROTATION_SPEED 3
+#define AXELERATION_SPEED 0.1
+#define DUMP_SPEED 0.1
 
 #define BAR_IMG "../Images/Gamblers_Bar.png"
 #define BELL_IMG "../Images/Gamblers_Bell.png"
@@ -18,6 +23,8 @@
 
 
 #include "../../Classes/GUIunit/GUIunit.hpp"
+#include "../../Libs/MiniLib/MiniLib.hpp"
+#include <math.h>
 
 namespace ACD{
     struct TextureInfo
@@ -57,6 +64,10 @@ namespace ACD{
 
             ImgDispl test_cherry;
 
+            bool is_axeliration;
+            bool is_slow_down;
+            bool is_break_mode;
+
             ImgDispl GetNext();
             void ProcessSymb(ImgDispl* inp);
 
@@ -71,3 +82,5 @@ namespace ACD{
     };
 
 }
+
+#endif

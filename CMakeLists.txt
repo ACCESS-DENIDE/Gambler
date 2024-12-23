@@ -40,6 +40,8 @@ set(HEADERS
     "Classes/GUIunit/GUIunit.hpp"
 
     "GUIunits/Drum/Drum.hpp"
+
+    "Libs/MiniLib/MiniLib.hpp"
 )
 
 

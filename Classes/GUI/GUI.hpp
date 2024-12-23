@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI_CLASS
+#define GUI_CLASS
 
 #include "../GUIunit/GUIunit.hpp"
 
@@ -30,3 +31,4 @@ namespace ACD{
 
     static void glfw_error_callback(int error, const char* description);
 }
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI_UNIT_CLASS
+#define GUI_UNIT_CLASS
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
@@ -40,3 +41,4 @@ namespace ACD{
     bool LoadTextureFromFile(const char* file_name, GLuint* out_texture, int* out_width, int* out_height);
 
 }
+#endif
