@@ -71,7 +71,11 @@ int ACD::GUI::Launch()
 
     ImGuiIO& io=ImGui::GetIO(); (void)io;
 
-    test_drum.LoadResourses();
+    test_drum1.LoadResourses();
+    test_drum2.LoadResourses();
+    test_drum3.LoadResourses();
+    test_drum4.LoadResourses();
+    test_drum5.LoadResourses();
 
     while (!glfwWindowShouldClose(window))
     {   
@@ -114,12 +118,14 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
     
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode | ImGuiDockNodeFlags_NoResize);
     
-    ImGui::Begin("Drums", NULL, ImGuiWindowFlags_NoResize);
-    test_drum.Process(0);
-    //test_drum.Process(1);
-    //test_drum.Process(2);
-    //test_drum.Process(3);
-    //test_drum.Process(4);    
+    ImGui::Begin("Drums", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar);
+    
+    test_drum1.Process(0);
+    test_drum2.Process(1);
+    test_drum3.Process(2);
+    test_drum4.Process(3);
+    test_drum5.Process(4);
+
     ImGui::End();
     
     ImGui::Begin("Info", NULL);    
@@ -136,6 +142,24 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
         stop_gamble_btn=ImGui::Button("STOP");
         ImGui::Spacing();
         //ImGui::SliderInt("Bet", &test_drum.speed, 1, 10);
+        if(start_gamble_btn){
+
+            test_drum1.Start();
+            test_drum2.Start();
+            test_drum3.Start();
+            test_drum4.Start();
+            test_drum5.Start();
+            
+
+        }
+        if(stop_gamble_btn){
+            test_drum1.Slow();
+            test_drum2.Slow();
+            test_drum3.Slow();
+            test_drum4.Slow();
+            test_drum5.Slow();
+            
+        }
     ImGui::End();
 
     return 0;

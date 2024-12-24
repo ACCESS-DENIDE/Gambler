@@ -21,6 +21,10 @@ set(SOURCE
    "Classes/GUIunit/GUIunit.cpp"  
 
    "GUIunits/Drum/Drum.cpp"
+
+   "Libs/MiniLib/MiniLib.cpp"
+
+    "Classes/StateMachine/StateMachine.cpp"
 )
 
 set(HEADERS
@@ -42,6 +46,8 @@ set(HEADERS
     "GUIunits/Drum/Drum.hpp"
 
     "Libs/MiniLib/MiniLib.hpp"
+
+    "Classes/StateMachine/StateMachine.hpp"
 )
 
 

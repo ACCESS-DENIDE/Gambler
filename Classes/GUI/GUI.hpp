@@ -15,7 +15,12 @@ namespace ACD{
             GLFWwindow *window;
             bool show_demo_window;
             ImVec4 clear_color;
-            ACD::Drum test_drum;
+
+            ACD::Drum test_drum1;
+            ACD::Drum test_drum2;
+            ACD::Drum test_drum3;
+            ACD::Drum test_drum4;
+            ACD::Drum test_drum5;
 
             int CreateFrame(ImGuiIO io);
             int Render();

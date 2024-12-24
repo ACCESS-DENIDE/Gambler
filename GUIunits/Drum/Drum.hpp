@@ -2,14 +2,21 @@
 #define DRUMM_CLASS
 
 
-#define IS_USE_BUNDLE_MODE false
+#define IS_USE_BUNDLE_MODE true
 
 #define DRUMS_AMOUNT 5
 #define DRUM_IMAGES_AMOUNT 9
 
-#define MAX_ROTATION_SPEED 3
-#define AXELERATION_SPEED 0.1
-#define DUMP_SPEED 0.1
+#define MAX_WORKING_SPEED 5
+#define MIN_WORKING_SPEED 2
+
+#define MAX_AXEL_SPEED 1
+#define MIN_AXEL_SPEED 0.5
+
+#define MAX_DUMP_SPEED 2
+#define MIN_DUMP_SPEED 1
+
+#define SPRING_SPEED 0.1
 
 #define BAR_IMG "../Images/Gamblers_Bar.png"
 #define BELL_IMG "../Images/Gamblers_Bell.png"
@@ -57,6 +64,9 @@ namespace ACD{
 
             ImVec2 defined_spacer=ImVec2(0, 19);
             
+            float speed;
+            double speed_delta;
+            float max_speed;
 
             ImgDispl symb1;
             ImgDispl symb2;
@@ -64,18 +74,23 @@ namespace ACD{
 
             ImgDispl test_cherry;
 
-            bool is_axeliration;
-            bool is_slow_down;
+            bool is_speed_change;
             bool is_break_mode;
+            double eta;
 
             ImgDispl GetNext();
             void ProcessSymb(ImgDispl* inp);
 
             void LoadImage(const char* path_to_file);
+            void Align(int from, float pos);
+
+            float frametime;
 
         public:
             Drum();
-            float speed;
+            void Start();
+            void Slow();
+            bool GetState(int * ret_state);
             void LoadResourses();
             void Process(int drum_num);
             ~Drum();
