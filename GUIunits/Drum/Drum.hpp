@@ -5,7 +5,7 @@
 #define IS_USE_BUNDLE_MODE true
 
 #define DRUMS_AMOUNT 5
-#define DRUM_IMAGES_AMOUNT 9
+#define DRUM_SPACER 10
 
 #define MAX_WORKING_SPEED 5
 #define MIN_WORKING_SPEED 2
@@ -18,30 +18,15 @@
 
 #define SPRING_SPEED 0.1
 
-#define BAR_IMG "../Images/Gamblers_Bar.png"
-#define BELL_IMG "../Images/Gamblers_Bell.png"
-#define CHERRY_IMG "../Images/Gamblers_Cherry.png"
-#define DOLLAR_IMG "../Images/Gamblers_Dollar.png"
-#define LEMON_IMG "../Images/Gamblers_Lemon.png"
-#define ORANGE_IMG "../Images/Gamblers_Orange.png"
-#define PLUM_IMG "../Images/Gamblers_Plum.png"
-#define SEVEN_IMG "../Images/Gamblers_Seven.png"
-#define WATERMELLON_IMG "../Images/Gamblers_Watermellon.png"
 
 
 #include "../../Classes/GUIunit/GUIunit.hpp"
 #include "../../Libs/MiniLib/MiniLib.hpp"
+#include "../../Libs/ImageLoader/ImageLoader.hpp"
+
 #include <math.h>
 
 namespace ACD{
-    struct TextureInfo
-    {
-        int texture_width = 0;
-        int texture_height = 0;
-        GLuint texture_data = 0;
-
-    };
-
     struct ImgDispl
     {
         TextureInfo texture;
@@ -52,7 +37,7 @@ namespace ACD{
     class Drum:GUIunit{
         private:
 
-            int spacer=10;
+            int spacer;
             int expected_drum_size;
             ImVec2 beg_pos;
             ImVec2 end_pos;
@@ -62,7 +47,7 @@ namespace ACD{
             char last_used_index;
             char loaded_index;
 
-            ImVec2 defined_spacer=ImVec2(0, 19);
+            ImVec2 defined_spacer;
             
             float speed;
             double speed_delta;
@@ -81,7 +66,6 @@ namespace ACD{
             ImgDispl GetNext();
             void ProcessSymb(ImgDispl* inp);
 
-            void LoadImage(const char* path_to_file);
             void Align(int from, float pos);
 
             float frametime;
@@ -91,7 +75,7 @@ namespace ACD{
             void Start();
             void Slow();
             bool GetState(int * ret_state);
-            void LoadResourses();
+            void ConnectResourses(TextureInfo* arr_ref);
             void Process(int drum_num);
             ~Drum();
     };

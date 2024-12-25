@@ -25,6 +25,14 @@ set(SOURCE
    "Libs/MiniLib/MiniLib.cpp"
 
     "Classes/StateMachine/StateMachine.cpp"
+
+    "Libs/ImageLoader/ImageLoader.cpp"
+
+    "States/Idle/StateIdle.cpp"
+    "States/SpeedUp/StateSpeedUp.cpp"
+    "States/Working/StateWorking.cpp"
+    "States/SlowDown/StateSlowDown.cpp"
+    "States/Result/StateResult.cpp"
 )
 
 set(HEADERS
@@ -48,6 +56,14 @@ set(HEADERS
     "Libs/MiniLib/MiniLib.hpp"
 
     "Classes/StateMachine/StateMachine.hpp"
+
+    "Libs/ImageLoader/ImageLoader.hpp"
+
+    "States/Idle/StateIdle.hpp"
+    "States/SpeedUp/StateSpeedUp.hpp"
+    "States/Working/StateWorking.hpp"
+    "States/SlowDown/StateSlowDown.hpp"
+    "States/Result/StateResult.hpp"
 )
 
 

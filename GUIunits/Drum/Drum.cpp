@@ -8,7 +8,7 @@ ACD::Drum::Drum()
 
     speed=0;
 
-    spacer=10;
+    spacer=DRUM_SPACER;
 
     defined_spacer=ImVec2(0, 19);
 
@@ -16,6 +16,7 @@ ACD::Drum::Drum()
     beg_pos=ImVec2(0, 0);
     end_pos=ImVec2(0, 0);
     origin_pos=ImVec2(0, 0);
+    defined_spacer=ImVec2(0, 19);
     last_used_index=0;
     loaded_index=0;
 
@@ -53,25 +54,32 @@ void ACD::Drum::Slow()
 bool ACD::Drum::GetState(int * ret_state)
 {
     if(is_speed_change){
-        (*ret_state)=-1;
+
+        if(ret_state!=nullptr){
+            (*ret_state)=-1;
+        }
+        
         return false;
     }
     
+
+
+    if(ret_state!=nullptr){
+        (*ret_state)=-1;
+    }
+    return true;
     
 }
 
-void ACD::Drum::LoadResourses()
+void ACD::Drum::ConnectResourses(TextureInfo* arr_ref)
 {
     const float initial_pos=0.16666675;
-    LoadImage(BAR_IMG);
-    LoadImage(BELL_IMG);
-    LoadImage(CHERRY_IMG);
-    LoadImage(DOLLAR_IMG);
-    LoadImage(LEMON_IMG);
-    LoadImage(ORANGE_IMG);
-    LoadImage(PLUM_IMG);
-    LoadImage(SEVEN_IMG);
-    LoadImage(WATERMELLON_IMG);
+
+    for (loaded_index=0; loaded_index<DRUM_IMAGES_AMOUNT; loaded_index++)
+    {
+        loaded_imges[loaded_index]=arr_ref[loaded_index];
+
+    }
 
     if(IS_USE_BUNDLE_MODE){
         Shuffle(&loaded_imges[0], 9);
@@ -154,7 +162,7 @@ void ACD::Drum::Process(int drum_num)
             speed=0;
             speed_delta=0;
             is_break_mode=false;
-
+            is_speed_change=false;
 
             int smallest=0;
             Min(3, &smallest, double(symb1.pos), double(symb2.pos), double(symb3.pos));
@@ -257,20 +265,6 @@ void ACD::Drum::ProcessSymb(ImgDispl *inp)
     ImGui::SetCursorPos(ImVec2(ext_spacers.x+spacer, ext_spacers.y+expected_pos));
     ImGui::Image((ImTextureID)(intptr_t)inp->texture.texture_data, ImVec2(texture_side, expected_size), ImVec2(0, expected_top_uv), ImVec2(1, expected_bottom_uv));
 
-}
-
-void ACD::Drum::LoadImage(const char* path_to_file)
-{
-    TextureInfo buff;
-    IM_ASSERT(loaded_index<DRUM_IMAGES_AMOUNT);
-    bool ret = LoadTextureFromFile(path_to_file, &buff.texture_data, &buff.texture_width, &buff.texture_height);
-
-    IM_ASSERT(ret);
-    IM_ASSERT(buff.texture_data!=0);
-
-    loaded_imges[loaded_index]=buff;
-
-    loaded_index++;
 }
 
 void ACD::Drum::Align(int from, float pos)
