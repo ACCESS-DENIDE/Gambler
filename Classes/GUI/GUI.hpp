@@ -1,12 +1,13 @@
 #ifndef GUI_CLASS
 #define GUI_CLASS
 
-#define START_CHIP_AMOUNT 10000
+#define START_CHIP_AMOUNT 100
 #define MIN_BET 10
 #define MAX_BET 100
 
 #include "../GUIunit/GUIunit.hpp"
 
+#include "../../GUIunits/InfoScreen/InfoScreen.hpp"
 
 
 #include "../StateMachine/StateMachine.hpp"
@@ -15,6 +16,8 @@
 #include "../../States/Working/StateWorking.hpp"
 #include "../../States/SlowDown/StateSlowDown.hpp"
 #include "../../States/Result/StateResult.hpp"
+
+#include <fstream>
 
 #define AUTOSTOP_SEC 10;
 
@@ -32,6 +35,8 @@ namespace ACD{
             float auto_stop_timer;
 
             Drum drum_list[DRUMS_AMOUNT];
+            InfoScreen q_info;
+
 
             StateMachine* cur_state;
 
@@ -41,6 +46,7 @@ namespace ACD{
             StateSlowDown internal_slow;
             StateResult internal_result;
 
+
             bool is_show_results;
             int result_val;
 
@@ -49,7 +55,11 @@ namespace ACD{
 
             bool TryStateSwitch(int new_state);
 
-            long long int chips_amount;
+            void LoadPB();
+            void StorePB();
+
+            int chips_amount;
+            int personal_best;
             int last_bet;
             int last_win;
             int cur_bet;

@@ -2,8 +2,8 @@
 
 ACD::StateSlowDown::StateSlowDown()
 {
-    my_state_id=3;
-    next_state_id=4;
+    my_state_id=SlowDown;
+    next_state_id=Result;
     SetDisplayName("Slow down");
 }
 
@@ -23,7 +23,7 @@ int ACD::StateSlowDown::Frame(Drum drums[DRUMS_AMOUNT])
     for (int i = 0; i < DRUMS_AMOUNT; i++)
     {
         
-        if(!drums[i].GetState(nullptr)){
+        if(!drums[i].GetState()){
             return 0;
         }
     }

@@ -5,6 +5,13 @@
 
 namespace ACD
 {
+    enum States:int{
+        Idle=0,
+        SpeedUp,
+        Work,
+        SlowDown,
+        Result
+    };
     class StateMachine
     {
         private:
@@ -13,8 +20,8 @@ namespace ACD
 
 
         protected:
-            int next_state_id;
-            int my_state_id;
+            States next_state_id;
+            States my_state_id;
             
             void SetDisplayName(const char* new_displayname);
             
@@ -22,7 +29,7 @@ namespace ACD
         public:
             StateMachine();
             bool IsValidStateSwitch(int new_state_id);
-            char* GetDisplayState(int * size);
+            const char* GetDisplayState(int * size=nullptr);
             int GetStateId();
             virtual int OnSwitch(Drum drums[DRUMS_AMOUNT]){/*NOTHING SPECIAL*/ return 0;};
             virtual int Frame(Drum drums[DRUMS_AMOUNT]){/*NOTHING SPECIAL*/ return 0;};

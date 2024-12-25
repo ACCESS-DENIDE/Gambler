@@ -10,7 +10,7 @@
 #define GL_SILENCE_DEPRECATION
 #endif
 
-
+#define WINDOW_TOP_SPACER ImVec2(0, 19)
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
@@ -30,7 +30,7 @@ namespace ACD{
     };
 
     ImVec2 operator+ (const ImVec2 a, const ImVec2 b);
-
+    ImVec2 operator- (const ImVec2 a, const ImVec2 b);
     
 }
 #endif

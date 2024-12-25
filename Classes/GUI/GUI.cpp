@@ -42,6 +42,14 @@ ACD::GUI::GUI()
     cur_bet=10;
 
     is_buffering_input=false;
+
+    internal_result.SetCalcBet(&cur_bet);
+    personal_best=0;
+    LoadPB();
+    if(personal_best<chips_amount){
+        personal_best=chips_amount;
+        StorePB();
+    }
 }
 
 ACD::GUI::GUI(int w, int h, const char *w_name)
@@ -87,6 +95,15 @@ ACD::GUI::GUI(int w, int h, const char *w_name)
 
 
     is_buffering_input=false;
+
+    internal_result.SetCalcBet(&cur_bet);
+    personal_best=0;
+    LoadPB();
+
+    if(personal_best<chips_amount){
+        personal_best=chips_amount;
+        StorePB();
+    }
 }
 
 int ACD::GUI::Launch()
@@ -96,7 +113,12 @@ int ACD::GUI::Launch()
 
     LoadDrumImages();
 
+    q_info.LoadImages(GetArrBegin());
+
+    float* q_tip_ref=q_info.GetQTipPointer();
+
     for(int i=0; i<DRUMS_AMOUNT; i++){
+        drum_list[i].SetLinkedTip(q_tip_ref);
         drum_list[i].ConnectResourses(GetArrBegin());
     }
 
@@ -113,15 +135,15 @@ int ACD::GUI::Launch()
 
         switch (cur_state->GetStateId())
         {
-            case 0:
+            case Idle:
                 break;
-            case 1:
+            case SpeedUp:
                 if(state_process_ret==1){
                     TryStateSwitch(2);
                     auto_stop_timer=AUTOSTOP_SEC;
                 }
                 break;
-            case 2:
+            case Work:
                 auto_stop_timer-=1.0f/float(io.Framerate);
                 if(auto_stop_timer<=0 || is_buffering_input){
                     TryStateSwitch(3);
@@ -129,19 +151,23 @@ int ACD::GUI::Launch()
                 }
                 
                 break;
-            case 3:
+            case SlowDown:
                 if(state_process_ret==1){
                     TryStateSwitch(4);
                     is_show_results=true;
                 }
                 break;
-            case 4:
+            case Result:
                 result_val=state_process_ret;
 
                 if(!is_show_results){
                     last_win=result_val;
                     last_bet=cur_bet;
                     chips_amount+=result_val;
+                    if(chips_amount>personal_best){
+                        personal_best=chips_amount;
+                        StorePB();
+                    }
                     TryStateSwitch(0);
                 }
                 break;
@@ -190,18 +216,20 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
 
     ImGui::End();
     
-    ImGui::Begin("Info", NULL);    
+    ImGui::Begin("Info", NULL, ImGuiWindowFlags_NoScrollbar);    
+    q_info.Process();
     ImGui::End();
     
     ImGui::Begin("Bank", NULL);
     ImGui::Text("Chips amount: %d", chips_amount);
+    ImGui::Text("Personal best: %d", personal_best);
     ImGui::Text("Last Bet: %d", last_bet);
-    ImGui::Text("Chips Win: %d", last_win);
+    ImGui::Text("Last Win: %d", last_win);
     ImGui::Text("Current Bet: %d", cur_bet);
     int temp_bet=cur_bet;
     ImGui::SliderInt("BET", &temp_bet, MIN_BET, MAX_BET);
 
-    if(cur_state->GetStateId()==0){
+    if(cur_state->GetStateId()==Idle){
         cur_bet=temp_bet;
     }
     
@@ -214,8 +242,8 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
         start_gamble_btn=ImGui::Button("START");
         stop_gamble_btn=ImGui::Button("STOP");
         ImGui::Text("Current state: ");
-        ImGui::Text(cur_state->GetDisplayState(nullptr));
-        if(cur_state->GetStateId()==2){
+        ImGui::Text(cur_state->GetDisplayState());
+        if(cur_state->GetStateId()==Work){
             ImGui::Text("Auto stop in: %.1f", auto_stop_timer);
         }
 
@@ -229,8 +257,7 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
 
         }
         if(stop_gamble_btn){
-            //TODO: Заменить все ID на Enum 
-            if(!TryStateSwitch(3) && cur_state->GetStateId()==1){
+            if(!TryStateSwitch(3) && cur_state->GetStateId()==SpeedUp){
                 is_buffering_input=true;
             }
 
@@ -238,7 +265,7 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
     ImGui::End();
 
     if(is_show_results){
-        ImGui::Begin("RESULTS", &is_show_results, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+        ImGui::Begin("RESULTS", &is_show_results, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize);
         ImGui::Text("You win %d chips.", result_val);
         ImGui::End();
     }
@@ -295,6 +322,27 @@ bool ACD::GUI::TryStateSwitch(int new_state)
         return true;
     }
     return false;
+}
+
+void ACD::GUI::LoadPB()
+{
+
+    std::ifstream fin;
+    fin.open("personal_best");
+    if(fin.good()){
+        fin>>personal_best;
+    }
+    fin.close();
+    return;
+}
+
+void ACD::GUI::StorePB()
+{
+    std::ofstream fout;
+    fout.open("personal_best");
+    fout<<personal_best;
+    fout.close();
+    return;
 }
 
 ACD::GUI::~GUI()

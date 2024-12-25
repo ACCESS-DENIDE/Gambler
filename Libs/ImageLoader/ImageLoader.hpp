@@ -17,6 +17,17 @@
 #define SEVEN_IMG "../Images/Gamblers_Seven.png"
 #define WATERMELLON_IMG "../Images/Gamblers_Watermellon.png"
 
+
+#define SEVEN_SCORE 7.0f
+#define BAR_SCORE 2.0f
+#define BELL_SCORE 1.5f
+#define DOLLAR_SCORE 1.0f
+#define WATERMELLON_SCORE 0.5f
+#define ORANGE_SCORE 0.4f
+#define LEMON_SCORE 0.3f
+#define PLUM_SCORE 0.2f
+#define CHERRY_SCORE 0.1f
+
 #include "../../Libs/STD_img/std_image.h"
 #include <stdio.h>
 #include <GLFW/glfw3.h>
@@ -29,6 +40,7 @@ namespace ACD
         int texture_width = 0;
         int texture_height = 0;
         GLuint texture_data = 0;
+        float score=0;
 
     };
 
@@ -38,7 +50,7 @@ namespace ACD
 
     void LoadDrumImages();
 
-    void LoadImage(const char* path);
+    void LoadImage(const char* path, float symb_score);
 
     bool LoadTextureFromMemory(const void* data, size_t data_size, GLuint* out_texture, int* out_width, int* out_height);
     bool LoadTextureFromFile(const char* file_name, GLuint* out_texture, int* out_width, int* out_height);

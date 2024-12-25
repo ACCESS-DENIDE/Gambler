@@ -21,6 +21,7 @@ set(SOURCE
    "Classes/GUIunit/GUIunit.cpp"  
 
    "GUIunits/Drum/Drum.cpp"
+    "GUIunits/InfoScreen/InfoScreen.cpp"
 
    "Libs/MiniLib/MiniLib.cpp"
 
@@ -52,6 +53,7 @@ set(HEADERS
     "Classes/GUIunit/GUIunit.hpp"
 
     "GUIunits/Drum/Drum.hpp"
+    "GUIunits/InfoScreen/InfoScreen.hpp"
 
     "Libs/MiniLib/MiniLib.hpp"
 

@@ -2,7 +2,7 @@
 
 ACD::StateIdle::StateIdle()
 {
-    my_state_id=0;
-    next_state_id=1;
+    my_state_id=Idle;
+    next_state_id=SpeedUp;
     SetDisplayName("Idle");
 }

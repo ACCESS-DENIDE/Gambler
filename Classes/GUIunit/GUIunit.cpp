@@ -23,3 +23,8 @@ ImVec2 ACD::operator+(const ImVec2 a, const ImVec2 b)
 {
     return ImVec2(a.x+b.x, a.y+b.y);
 }
+
+ImVec2 ACD::operator-(const ImVec2 a, const ImVec2 b)
+{
+    return ImVec2(a.x-b.x, a.y-b.y);
+}

@@ -10,13 +10,12 @@ ACD::Drum::Drum()
 
     spacer=DRUM_SPACER;
 
-    defined_spacer=ImVec2(0, 19);
 
     expected_drum_size=0;
     beg_pos=ImVec2(0, 0);
     end_pos=ImVec2(0, 0);
     origin_pos=ImVec2(0, 0);
-    defined_spacer=ImVec2(0, 19);
+    defined_spacer=WINDOW_TOP_SPACER;
     last_used_index=0;
     loaded_index=0;
 
@@ -27,8 +26,15 @@ ACD::Drum::Drum()
     frametime=0;
     eta=0;
 
+    linked_tip=nullptr;
+
     
 
+}
+
+void ACD::Drum::SetLinkedTip(float *inp)
+{
+    linked_tip=inp;
 }
 
 void ACD::Drum::Start()
@@ -51,22 +57,58 @@ void ACD::Drum::Slow()
     
 }
 
-bool ACD::Drum::GetState(int * ret_state)
+bool ACD::Drum::GetState(float * ret_score, GLuint* ref_to_texture)
 {
     if(is_speed_change){
 
-        if(ret_state!=nullptr){
-            (*ret_state)=-1;
+        if(ret_score!=nullptr){
+            (*ret_score)=0;
+        }
+        if(ref_to_texture!=nullptr){
+            (*ref_to_texture)=0;
         }
         
         return false;
     }
-    
 
+    float found_score=0;
+    GLint found_ref=0;
 
-    if(ret_state!=nullptr){
-        (*ret_state)=-1;
+    double aproach1=abs(symb1.pos-0.5);
+    double aproach2=abs(symb2.pos-0.5);
+    double aproach3=abs(symb3.pos-0.5);
+
+    int sellected_aproach=0;
+
+    Min(3, &sellected_aproach, aproach1, aproach2, aproach3);
+
+    switch(sellected_aproach)
+    {
+        case 0:
+            found_score=symb1.texture.score;
+            found_ref=symb1.texture.texture_data;
+            break;
+        case 1:
+            found_score=symb2.texture.score;
+            found_ref=symb2.texture.texture_data;
+            break;
+        case 2:
+            found_score=symb3.texture.score;
+            found_ref=symb3.texture.texture_data;
+            break;
+        default:
+            //HOW??
+            found_score=0;
+            break;
     }
+
+    if(ret_score!=nullptr){
+        (*ret_score)=found_score;
+    }
+    if(ref_to_texture!=nullptr){
+        (*ref_to_texture)=found_ref;
+    }
+    
     return true;
     
 }
@@ -264,7 +306,12 @@ void ACD::Drum::ProcessSymb(ImgDispl *inp)
     
     ImGui::SetCursorPos(ImVec2(ext_spacers.x+spacer, ext_spacers.y+expected_pos));
     ImGui::Image((ImTextureID)(intptr_t)inp->texture.texture_data, ImVec2(texture_side, expected_size), ImVec2(0, expected_top_uv), ImVec2(1, expected_bottom_uv));
-
+    if(ImGui::IsItemHovered()){
+        if(linked_tip!=nullptr){
+            (*linked_tip)=inp->texture.score;
+        }
+        
+    }
 }
 
 void ACD::Drum::Align(int from, float pos)

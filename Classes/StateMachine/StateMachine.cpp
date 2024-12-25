@@ -53,7 +53,7 @@ bool ACD::StateMachine::IsValidStateSwitch(int new_state_id)
     return (new_state_id==next_state_id);
 }
 
-char *ACD::StateMachine::GetDisplayState(int * size)
+const char *ACD::StateMachine::GetDisplayState(int * size)
 {
     if(size!=nullptr){
         (*size)=display_size;

@@ -63,6 +63,8 @@ namespace ACD{
             bool is_break_mode;
             double eta;
 
+            float* linked_tip;
+
             ImgDispl GetNext();
             void ProcessSymb(ImgDispl* inp);
 
@@ -72,9 +74,10 @@ namespace ACD{
 
         public:
             Drum();
+            void SetLinkedTip(float * inp);
             void Start();
             void Slow();
-            bool GetState(int * ret_state);
+            bool GetState(float * ret_score=nullptr, GLuint* ref_to_texture=nullptr);
             void ConnectResourses(TextureInfo* arr_ref);
             void Process(int drum_num);
             ~Drum();

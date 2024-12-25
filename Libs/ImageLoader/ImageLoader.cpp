@@ -6,25 +6,26 @@ ACD::TextureInfo loaded_textures[DRUM_IMAGES_AMOUNT];
 
 ACD::TextureInfo *ACD::GetArrBegin()
 {
+    //Hit if not enough images loaded
+    assert(DRUM_IMAGES_AMOUNT==loaded_texture_cou);
     return &loaded_textures[0];
 }
 
 void ACD::LoadDrumImages()
 {
-    LoadImage(BAR_IMG);
-    LoadImage(BELL_IMG);
-    LoadImage(CHERRY_IMG);
-    LoadImage(DOLLAR_IMG);
-    LoadImage(LEMON_IMG);
-    LoadImage(ORANGE_IMG);
-    LoadImage(PLUM_IMG);
-    LoadImage(SEVEN_IMG);
-    LoadImage(WATERMELLON_IMG);
-
+    LoadImage(BAR_IMG, BAR_SCORE);
+    LoadImage(BELL_IMG, BELL_SCORE);
+    LoadImage(CHERRY_IMG, CHERRY_SCORE);
+    LoadImage(DOLLAR_IMG, DOLLAR_SCORE);
+    LoadImage(LEMON_IMG, LEMON_SCORE);
+    LoadImage(ORANGE_IMG, ORANGE_SCORE);
+    LoadImage(PLUM_IMG, PLUM_SCORE);
+    LoadImage(SEVEN_IMG, SEVEN_SCORE);
+    LoadImage(WATERMELLON_IMG, WATERMELLON_SCORE);
     
 }
 
-void ACD::LoadImage(const char *path)
+void ACD::LoadImage(const char *path, float symb_score)
 {
     TextureInfo buff;
     assert(loaded_texture_cou<DRUM_IMAGES_AMOUNT);
@@ -32,6 +33,8 @@ void ACD::LoadImage(const char *path)
 
     assert(ret);
     assert(buff.texture_data!=0);
+
+    buff.score=symb_score;
 
     loaded_textures[loaded_texture_cou]=buff;
 

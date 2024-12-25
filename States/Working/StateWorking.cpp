@@ -2,8 +2,8 @@
 
 ACD::StateWorking::StateWorking()
 {
-    my_state_id=2;
-    next_state_id=3;
+    my_state_id=Work;
+    next_state_id=SlowDown;
     SetDisplayName("Working");
 }
 
