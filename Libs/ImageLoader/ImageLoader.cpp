@@ -1,9 +1,13 @@
 #include "ImageLoader.hpp"
 
+/// @brief counter of loaded textures
 int loaded_texture_cou=0;
 
+/// @brief allocated memory for texture loading
 ACD::TextureInfo loaded_textures[DRUM_IMAGES_AMOUNT];
 
+/// @brief Provides reference to copy textures in modules
+/// @return pointer to array
 ACD::TextureInfo *ACD::GetArrBegin()
 {
     //Hit if not enough images loaded
@@ -11,6 +15,7 @@ ACD::TextureInfo *ACD::GetArrBegin()
     return &loaded_textures[0];
 }
 
+/// @brief Automaticaly load all assigned images
 void ACD::LoadDrumImages()
 {
     LoadImage(BAR_IMG, BAR_SCORE);
@@ -25,15 +30,22 @@ void ACD::LoadDrumImages()
     
 }
 
+
+/// @brief Load required texture
+/// @param path path to file
+/// @param symb_score score of this symbol
 void ACD::LoadImage(const char *path, float symb_score)
 {
+    //Load texture
     TextureInfo buff;
     assert(loaded_texture_cou<DRUM_IMAGES_AMOUNT);
     bool ret = LoadTextureFromFile(path, &buff.texture_data, &buff.texture_width, &buff.texture_height);
 
+    //Check, if texture loaded properly
     assert(ret);
     assert(buff.texture_data!=0);
 
+    //store loaded texture
     buff.score=symb_score;
 
     loaded_textures[loaded_texture_cou]=buff;
@@ -41,6 +53,13 @@ void ACD::LoadImage(const char *path, float symb_score)
     loaded_texture_cou++;
 }
 
+/// @brief Stores loaded texture from RAM to VRAM
+/// @param data raw texture
+/// @param data_size sie of raw texture
+/// @param out_texture pointer to stored texture
+/// @param out_width texture width
+/// @param out_height texture height
+/// @return true if succeed, false otherwise
 bool ACD::LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_texture, int *out_width, int *out_height)
 {
     // Load from file
@@ -71,7 +90,13 @@ bool ACD::LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_
     return true;
 }
 
-// Open and read a file, then forward to LoadTextureFromMemory()
+
+/// @brief Load texture from file to RAM
+/// @param file_name texture file name
+/// @param out_texture pointer to texture in VRAM
+/// @param out_width texture width
+/// @param out_height texture height
+/// @return true if succeed, false otherwise
 bool ACD::LoadTextureFromFile(const char* file_name, GLuint* out_texture, int* out_width, int* out_height)
 {
     FILE* f = fopen(file_name, "rb");

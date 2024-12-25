@@ -5,6 +5,7 @@
 
 namespace ACD
 {
+    /// @brief Class for processing Idle state
     class StateIdle:public StateMachine
     {
     private:

@@ -1,5 +1,4 @@
 #include "StateIdle.hpp"
-
 ACD::StateIdle::StateIdle()
 {
     my_state_id=Idle;

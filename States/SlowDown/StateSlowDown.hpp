@@ -5,6 +5,8 @@
 
 namespace ACD
 {
+
+    /// @brief Class for processing SlowDown state
     class StateSlowDown:public StateMachine
     {
     private:

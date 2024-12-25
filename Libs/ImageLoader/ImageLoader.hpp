@@ -29,12 +29,17 @@
 #define CHERRY_SCORE 0.1f
 
 #include "../../Libs/STD_img/std_image.h"
+
+//Used for image loader
 #include <stdio.h>
+//GUI backend
 #include <GLFW/glfw3.h>
+//used for generate critical abortions
 #include <assert.h>
 
 namespace ACD
 {
+    /// @brief Loaded texture data container
     struct TextureInfo
     {
         int texture_width = 0;

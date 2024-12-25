@@ -9,6 +9,7 @@ ACD::StateSlowDown::StateSlowDown()
 
 int ACD::StateSlowDown::OnSwitch(Drum drums[DRUMS_AMOUNT])
 {
+    //On start send slowdown command to all drums
     for (int i = 0; i < DRUMS_AMOUNT; i++)
     {
         drums[i].Slow();
@@ -22,8 +23,9 @@ int ACD::StateSlowDown::Frame(Drum drums[DRUMS_AMOUNT])
 
     for (int i = 0; i < DRUMS_AMOUNT; i++)
     {
-        
+        //Check, if all drums stopped
         if(!drums[i].GetState()){
+            //if not, send error
             return 0;
         }
     }

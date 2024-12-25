@@ -1,0 +1,50 @@
+
+# ONE ARMED BANDIT
+
+Test task for Octavian Gaming
+
+
+
+## Random providers
+
+- Random max speed of drum
+- Random axeleration/Slow down speed of drum
+- (If enabled) Bundle mode symbol provider
+
+
+## Bundle mode
+
+Before poping symbols from array, they will be shuffled.
+
+### Example
+
+- Standart mode
+[1, 2, 3, 4, 5];
+pop()->1;
+pop()->2;
+pop()->3;
+pop()->4;
+pop()->5;
+Renew();
+[1, 2, 3, 4, 5]
+- Bundle mode
+Shuffle();
+[3, 1, 2, 5, 4]
+pop()->3;
+pop()->1;
+pop()->2;
+pop()->5;
+pop()->4;
+Renew();
+[5, 2, 1, 4, 3]
+
+
+
+## Required Libs
+
+#### OpenGL2
+#### GLFW3
+
+
+
+

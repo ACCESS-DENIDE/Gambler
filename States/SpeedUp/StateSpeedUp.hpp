@@ -5,6 +5,8 @@
 
 namespace ACD
 {
+
+    /// @brief Class for processing SpeedUp state
     class StateSpeedUp:public StateMachine
     {
     private:

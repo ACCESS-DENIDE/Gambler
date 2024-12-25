@@ -9,11 +9,14 @@
 
 namespace ACD
 {
+    /// @brief Class for processing Result showing state
     class StateResult:public StateMachine
     {
     private:
 
+    /// @brief reference to player's bet
     int * calc_bet;
+    /// @brief calculated player's win
     int calc_win;
 
     public:

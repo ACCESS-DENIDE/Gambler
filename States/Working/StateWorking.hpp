@@ -5,6 +5,7 @@
 
 namespace ACD
 {
+    /// @brief Class for processing Working(spinning) state
     class StateWorking:public StateMachine
     {
     private:
