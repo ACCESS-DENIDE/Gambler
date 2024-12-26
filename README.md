@@ -4,6 +4,23 @@
 Test task for Octavian Gaming
 
 
+## Required Libs
+
+##### OpenGL2
+##### GLFW3
+
+## Build
+
+To build this project, run:
+
+
+```bash
+  git clone https://github.com/ACCESS-DENIDE/Gambler
+  cmake .
+  make
+```
+
+!IMPORTANT! Folder "Images" MUST be in the same directory, as executable.
 
 ## Random providers
 
@@ -39,11 +56,6 @@ Renew();
 [5, 2, 1, 4, 3]
 
 
-
-## Required Libs
-
-##### OpenGL2
-##### GLFW3
 
 ## Flexibility
 

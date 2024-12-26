@@ -7,15 +7,15 @@
 #define DRUM_IMAGES_AMOUNT 9
 
 
-#define BAR_IMG "../Images/Gamblers_Bar.png"
-#define BELL_IMG "../Images/Gamblers_Bell.png"
-#define CHERRY_IMG "../Images/Gamblers_Cherry.png"
-#define DOLLAR_IMG "../Images/Gamblers_Dollar.png"
-#define LEMON_IMG "../Images/Gamblers_Lemon.png"
-#define ORANGE_IMG "../Images/Gamblers_Orange.png"
-#define PLUM_IMG "../Images/Gamblers_Plum.png"
-#define SEVEN_IMG "../Images/Gamblers_Seven.png"
-#define WATERMELLON_IMG "../Images/Gamblers_Watermellon.png"
+#define BAR_IMG "Images/Gamblers_Bar.png"
+#define BELL_IMG "Images/Gamblers_Bell.png"
+#define CHERRY_IMG "Images/Gamblers_Cherry.png"
+#define DOLLAR_IMG "Images/Gamblers_Dollar.png"
+#define LEMON_IMG "Images/Gamblers_Lemon.png"
+#define ORANGE_IMG "Images/Gamblers_Orange.png"
+#define PLUM_IMG "Images/Gamblers_Plum.png"
+#define SEVEN_IMG "Images/Gamblers_Seven.png"
+#define WATERMELLON_IMG "Images/Gamblers_Watermellon.png"
 
 
 #define SEVEN_SCORE 7.0f
