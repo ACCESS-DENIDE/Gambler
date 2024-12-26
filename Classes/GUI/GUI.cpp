@@ -212,11 +212,10 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
     
     
     //Setup docking in main window (for layout)
-    ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode | ImGuiDockNodeFlags_NoResize);
+    ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode );
     
     //Generate subwindow with drums
-    ImGui::Begin("Drums", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar);
-    
+    ImGui::Begin("Drums", NULL, ImGuiWindowFlags_NoScrollbar);
         for(int i=0; i<DRUMS_AMOUNT; i++){
             //Generate frame in each drum
             drum_list[i].Process(i);
