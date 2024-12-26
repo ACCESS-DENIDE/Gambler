@@ -16,6 +16,7 @@ To build this project, run:
 
 ```bash
   git clone https://github.com/ACCESS-DENIDE/Gambler
+  cd Gambler
   cmake .
   make
 ```
