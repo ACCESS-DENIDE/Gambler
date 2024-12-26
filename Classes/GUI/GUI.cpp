@@ -287,8 +287,9 @@ int ACD::GUI::CreateFrame(ImGuiIO io)
 
     //Generate result subwindow, if required
     if(is_show_results){
-        ImGui::Begin("RESULTS", &is_show_results, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize);
+        ImGui::Begin("RESULTS", &is_show_results, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::Text("You win %d chips.", result_val);
+            ImGui::Text("Total multiplyer: x%.1f", float(result_val)/float(cur_bet));          
         ImGui::End();
     }
     
