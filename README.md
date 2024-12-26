@@ -23,6 +23,18 @@ To build this project, run:
 
 !IMPORTANT! Folder "Images" MUST be in the same directory, as executable.
 
+## launch
+
+Default launch
+```bash
+  ./Gambler
+```
+
+Launch in service mode (automaticly count all coombinations and average win multiplication)
+```bash
+  ./Gambler -t
+```
+
 ## Random providers
 
 - Random max speed of drum
