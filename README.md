@@ -70,6 +70,7 @@ Player's win calculated as multiplication between player's bet and total multipl
 - [7; 2; 7; 2; 7] = 7 x 2 x 7 x 2 x 7 = 1372
  
  This system provides wide abilities to combine symbols.
+ (Information about symbol score can be acquired by hovering the mouse above the symbol on the "Info" subwindow, or above the symbol on a drum. Score will appear in the bottom left corner of the "Info" subwindow.)
 
  ## Additional features
  - This program has a special test mode. In this mode, the program will automatically calculate the amount of possible combinations and the average win multiplier. To access this mode, launch the program with the additional "-t" parameter (all output will be provided through the console stream)
